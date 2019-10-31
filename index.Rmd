@@ -1,11 +1,17 @@
 ---
-title: "My awesome website"
+title: "Barik's website"
 output: 
   html_document:
     toc: true
     toc_float: true
 ---
 
-# This is Jeff's awesome website
+# Introduction
 
-![](https://media.giphy.com/media/drXGoW1iudhKw/giphy.gif)
+Hello! I'm Barik and this is my website. You can use this website to:
+
+1. Check out my Resume, by clicking on the Resume section in the top right
+2. Email me, by clicking on the letter icon in the top right
+3. Check out my github page, by clicking on the github icon in the top right
+4. Check out my Linkedin Page, by clicking on the briefcase icon in the top right
+5. Check out some plots I made
