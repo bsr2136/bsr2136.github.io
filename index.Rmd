@@ -8,10 +8,24 @@ output:
 
 # Introduction
 
-Hello! I'm Barik and this is my website. You can use this website to:
+Hello! I'm Barik and this is my website. I'm currently a first year graduate student pursuing an M.S. in Biostatistics at the Columbia University Mailman School of Public Health. You can use this website to:
 
-1. Check out my Resume, by clicking on the Resume section in the top right
+1. See my Resume, by clicking on the Resume section in the top right
 2. Email me, by clicking on the letter icon in the top right
-3. Check out my github page, by clicking on the github icon in the top right
-4. Check out my Linkedin Page, by clicking on the briefcase icon in the top right
-5. Check out some plots I made
+3. Go to my Github page, by clicking on the github icon in the top right
+4. Go to my Linkedin Page, by clicking on the briefcase icon in the top right
+5. Check out some plots I made, by clicking the "Flexdashboard" on the left below "Introduction", or by simply scrolling down
+
+# Flexdashboard
+
+```{r, echo = F}
+library(tidyverse)
+library(p8105.datasets)
+library(lubridate)
+data(rest_inspec)
+
+df <- rest_inspec %>%
+  filter(year(inspection_date) == 2017) %>%
+```
+
+
