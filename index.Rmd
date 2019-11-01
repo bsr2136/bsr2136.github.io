@@ -9,7 +9,7 @@ output:
 Hello! I'm Barik and this is my website. I'm currently a first year graduate student pursuing an M.S. in Biostatistics at the Columbia University Mailman School of Public Health. You can navigate this website using the links at the top right of the screen. You can use this website to:
 
 1. See my Resume, by clicking on the "About" section
-2. Check out some plots I made, by clicking on the "Dashboard" section
+2. Check out a dashboard that I created with NYC Restaurant Inspection Data in 2017, by clicking on the "Dashboard" section
 3. Email me, by clicking on the letter icon
 4. Go to my Github page, by clicking on the github icon
 5. Go to my Linkedin Page, by clicking on the briefcase icon
