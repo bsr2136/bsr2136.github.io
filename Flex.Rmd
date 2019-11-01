@@ -1,0 +1,95 @@
+---
+title: "Restaurant Inspection Data NYC 2017"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(p8105.datasets)
+library(lubridate)
+library(plotly)
+
+data(rest_inspec)
+
+df <- rest_inspec %>% 
+  filter(year(inspection_date) == 2017 &
+           !(is.na(score)|is.na(grade)) &
+           grade != "Not Yet Graded" &
+           boro != "Missing"
+         ) %>%
+  mutate(cuisine_description = 
+      ifelse(cuisine_description ==
+            "Latin (Cuban, Dominican, Puerto Rican, South & Central American)",
+                "Latin",cuisine_description)) %>%
+  mutate(cuisine_description =
+      ifelse(cuisine_description ==
+               "CafÃ©/Coffee/Tea","Coffee/Tea",cuisine_description))
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Number of Restaurants by Most Common Cuisines
+
+```{r, echo = F}
+g1 <- inner_join(df, 
+                    df %>% group_by(cuisine_description) %>%
+                           summarise(n_cuisine = n()), 
+                by = "cuisine_description") %>%
+      filter(n_cuisine >= 1000) %>%
+  mutate(cuisine_description = fct_reorder(cuisine_description,n_cuisine)) %>%
+  ggplot(aes(x=cuisine_description, fill = boro)) + geom_bar() +
+  theme(axis.text.x = element_text(angle = 90)) +
+      xlab("Cuisine Type") + ylab("Number of Restaurants")
+  
+ggplotly(g1)
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Score Distribution by Cuisine Type
+
+```{r, echo = F}
+g2 <- inner_join(df, 
+                    df %>% group_by(cuisine_description) %>%
+                           summarise(n_cuisine = n(),
+                                    median_score = median(score)), 
+                by = "cuisine_description") %>%
+      filter(n_cuisine >= 1000) %>%
+      mutate(cuisine_description = fct_reorder(cuisine_description,n_cuisine)) %>%
+      ggplot(aes(x=cuisine_description,y=score)) + geom_boxplot() +
+      theme(axis.text.x = element_text(angle = 90)) +
+      xlab("Cuisine Type") + ylab("Score")
+
+ggplotly(g2)
+```
+
+### Chart C
+
+```{r, echo = F}
+g3 <- inner_join(df, 
+                    df %>% group_by(cuisine_description) %>%
+                           summarise(n_cuisine = n(),
+                                    median_score = median(score)), 
+                by = "cuisine_description") %>%
+      filter(n_cuisine >= 1000) %>%
+      mutate(cuisine_description = fct_reorder(cuisine_description,n_cuisine),
+             a = ifelse(grade=="A",1,0)) %>%
+  group_by(boro,cuisine_description) %>%
+  summarise(count = n(),
+            number_of_a = sum(a),
+            proportion_of_a = number_of_a/count) %>%
+  ggplot(aes(x=cuisine_description,y=proportion_of_a,color=boro)) +
+  geom_point() +
+    theme(axis.text.x = element_text(angle = 90)) +
+        xlab("Cuisine Type") + ylab("Percent of A Reviews") +
+  labs(color = "Borough")
+
+ggplotly(g3)
+```
+
