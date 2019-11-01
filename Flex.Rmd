@@ -33,30 +33,10 @@ df <- rest_inspec %>%
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Number of Restaurants
+### Score Distribution by Cuisine
 
 ```{r, echo = F}
 g1 <- inner_join(df, 
-                    df %>% group_by(cuisine_description) %>%
-                           summarise(n_cuisine = n()), 
-                by = "cuisine_description") %>%
-      filter(n_cuisine >= 1000) %>%
-  mutate(cuisine_description = fct_reorder(cuisine_description,n_cuisine)) %>%
-  ggplot(aes(x=cuisine_description, fill = boro)) + geom_bar() +
-  theme(axis.text.x = element_text(angle = 90)) +
-  xlab("Cuisine Type") + ylab("Number of Restaurants") +
-  labs(fill = "Borough")
-  
-ggplotly(g1)
-```
-
-Column {data-width=350}
------------------------------------------------------------------------
-
-### Score Distribution
-
-```{r, echo = F}
-g2 <- inner_join(df, 
                     df %>% group_by(cuisine_description) %>%
                            summarise(n_cuisine = n(),
                                     median_score = median(score)), 
@@ -65,12 +45,32 @@ g2 <- inner_join(df,
       mutate(cuisine_description = fct_reorder(cuisine_description,n_cuisine)) %>%
       ggplot(aes(x=cuisine_description,y=score)) + geom_boxplot() +
       theme(axis.text.x = element_text(angle = 90)) +
-      xlab("Cuisine Type") + ylab("Score")
+      xlab("Cuisine") + ylab("Score")
 
+ggplotly(g1)
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Number of Restaurants by Cuisine and Borough
+
+```{r, echo = F}
+g2 <- inner_join(df, 
+                    df %>% group_by(cuisine_description) %>%
+                           summarise(n_cuisine = n()), 
+                by = "cuisine_description") %>%
+      filter(n_cuisine >= 1000) %>%
+  mutate(cuisine_description = fct_reorder(cuisine_description,n_cuisine)) %>%
+  ggplot(aes(x=cuisine_description, fill = boro)) + geom_bar() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  xlab("Cuisine") + ylab("Number of Restaurants") +
+  labs(fill = "Borough")
+  
 ggplotly(g2)
 ```
 
-### Percent of A Grades
+### Percent of A Grades by Cuisine and Borough
 
 ```{r, echo = F}
 g3 <- inner_join(df, 
@@ -88,7 +88,7 @@ g3 <- inner_join(df,
   ggplot(aes(x=cuisine_description,y=proportion_of_a,color=boro)) +
   geom_point() +
     theme(axis.text.x = element_text(angle = 90)) +
-        xlab("Cuisine Type") + ylab("Percent of A Grades") +
+        xlab("Cuisine") + ylab("Percent") +
   labs(color = "Borough")
 
 ggplotly(g3)
