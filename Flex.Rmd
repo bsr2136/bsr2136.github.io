@@ -53,7 +53,7 @@ ggplotly(g1)
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Number of Restaurants by Cuisine and Borough
+### Count of Restaurants by Cuisine and Borough
 
 ```{r, echo = F}
 g2 <- inner_join(df, 
@@ -64,7 +64,7 @@ g2 <- inner_join(df,
   mutate(cuisine_description = fct_reorder(cuisine_description,n_cuisine)) %>%
   ggplot(aes(x=cuisine_description, fill = boro)) + geom_bar() +
   theme(axis.text.x = element_text(angle = 90)) +
-  xlab("Cuisine") + ylab("Number of Restaurants") +
+  xlab("Cuisine") + ylab("Count") +
   labs(fill = "Borough")
   
 ggplotly(g2)
