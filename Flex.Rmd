@@ -52,7 +52,7 @@ ggplotly(g1)
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Score Distribution by Cuisine Type
+### Score Distribution by Most Common Cuisines
 
 ```{r, echo = F}
 g2 <- inner_join(df, 
@@ -69,7 +69,7 @@ g2 <- inner_join(df,
 ggplotly(g2)
 ```
 
-### Chart C
+### Percent of A Grades by Borough and Most Common Cuisines
 
 ```{r, echo = F}
 g3 <- inner_join(df, 
@@ -87,7 +87,7 @@ g3 <- inner_join(df,
   ggplot(aes(x=cuisine_description,y=proportion_of_a,color=boro)) +
   geom_point() +
     theme(axis.text.x = element_text(angle = 90)) +
-        xlab("Cuisine Type") + ylab("Percent of A Reviews") +
+        xlab("Cuisine Type") + ylab("Percent of A Grades") +
   labs(color = "Borough")
 
 ggplotly(g3)
