@@ -1,12 +1,10 @@
 ---
-title: "Barik's website"
+title: "Barik's Website Introduction"
 output: 
   html_document:
     toc: true
     toc_float: true
 ---
-
-# Introduction
 
 Hello! I'm Barik and this is my website. I'm currently a first year graduate student pursuing an M.S. in Biostatistics at the Columbia University Mailman School of Public Health. You can navigate this website using the links at the top right of the screen. You can use this website to:
 

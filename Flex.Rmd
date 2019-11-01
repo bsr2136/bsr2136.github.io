@@ -30,10 +30,10 @@ df <- rest_inspec %>%
                "CafÃ©/Coffee/Tea","Coffee/Tea",cuisine_description))
 ```
 
-Column {data-width=650}
+Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Number of Restaurants by Most Common Cuisines
+### Number of Restaurants
 
 ```{r, echo = F}
 g1 <- inner_join(df, 
@@ -44,7 +44,8 @@ g1 <- inner_join(df,
   mutate(cuisine_description = fct_reorder(cuisine_description,n_cuisine)) %>%
   ggplot(aes(x=cuisine_description, fill = boro)) + geom_bar() +
   theme(axis.text.x = element_text(angle = 90)) +
-      xlab("Cuisine Type") + ylab("Number of Restaurants")
+  xlab("Cuisine Type") + ylab("Number of Restaurants") +
+  labs(fill = "Borough")
   
 ggplotly(g1)
 ```
@@ -52,7 +53,7 @@ ggplotly(g1)
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Score Distribution by Most Common Cuisines
+### Score Distribution
 
 ```{r, echo = F}
 g2 <- inner_join(df, 
@@ -69,7 +70,7 @@ g2 <- inner_join(df,
 ggplotly(g2)
 ```
 
-### Percent of A Grades by Borough and Most Common Cuisines
+### Percent of A Grades
 
 ```{r, echo = F}
 g3 <- inner_join(df, 
